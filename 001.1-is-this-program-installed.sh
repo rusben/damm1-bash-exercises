@@ -4,12 +4,12 @@
 # $@ : Contains an array with all parameters the program gets
 if [ $# -eq 1 ] ; then
 	
-	PROGRAM_INSTALLED=$(dpkg -l | grep $1 | wc -l)
+	PROGRAM_INSTALLED=$(dpkg -l $1 | wc -l)
 
 	if [ $PROGRAM_INSTALLED -gt 0 ] ; then
-		echo "The program is installed"
+		echo "The program $1 is installed"
 	else
-		echo "Ouch! The program is not installed."
+		echo "Ouch! The program $1 is not installed."
 	fi
 else
 	#help
