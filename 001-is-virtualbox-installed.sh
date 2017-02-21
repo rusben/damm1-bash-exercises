@@ -4,7 +4,7 @@
 
 VBOX_INSTALLED=$(dpkg -l | grep virtualbox | wc -l)
 
-if [ $VBOX_INSTALLED > "0" ]; then
+if [ $VBOX_INSTALLED -gt "0" ]; then
 	echo "1"
 else
 	echo "0"
