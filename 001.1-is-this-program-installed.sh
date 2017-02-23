@@ -6,7 +6,7 @@ if [ $# -eq 1 ] ; then
 	
 	PROGRAM_INSTALLED=$(dpkg -l $1 | wc -l)
 
-	if [ $PROGRAM_INSTALLED -gt 0 ] ; then
+	if [ $PROGRAM_INSTALLED -gt "1" ] ; then
 		echo "The program $1 is installed"
 	else
 		echo "Ouch! The program $1 is not installed."
