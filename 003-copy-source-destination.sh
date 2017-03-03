@@ -17,9 +17,14 @@ if [ $# -eq 2 ] ; then
   		if [ ! -d "$DESTINATION_FOLDER" ]; then
 			echo "Creating <destination-folder> $2."	
 			mkdir -p $2
-		else
+		fi
+
+		# Check if after the creation the folder exists <destination-folder>
+		if [ -d "$DESTINATION_FOLDER" ]; then
 			# Copy the content from <source-folder> to <destination-folder>
 			cp -R $1/* $2
+		else
+			echo "Ouch! An error ocurred while creating <destination-folder> $1"
   		fi
 	fi
 
