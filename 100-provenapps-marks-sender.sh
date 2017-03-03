@@ -1,10 +1,7 @@
 #!/bin/bash
 
-PRIMARY_GROUP=alumnes
-HOST=localhost
-
-#which a2ensite
-#${A2ENSITE} new-domain.com
+# Variables
+EMAIL_SENDER=no-reply
 CHMOD=/bin/chmod
 CHOWN=/bin/chown
 MKDIR=/bin/mkdir
@@ -12,27 +9,21 @@ SENDMAIL=/usr/sbin/sendmail
 
 #Three parameters
 if [ $# -eq 2 ] ; then
-	#First parameter is the group's name
-	#Second parameter is the number of users
-	#Third parameter is a file path containing an ordered list of emails, just one
+	# First parameter is the file path containing the marks, first line is the mark description, 
+	# then one line per student with the marks.
+	# Second parameter is a file path containing an ordered list of emails, just one
 	# column with a valid email address. 
-	#GROUP_NAME=$1
-	#USERS_NUMBER=$2
 	MARKS_LIST_PATH=$1
 	EMAILS_LIST_PATH=$2
 
-#http://stackoverflow.com/questions/12022319/bash-echo-number-of-lines-of-file-given-in-a-bash-variable-without-the-file-name
-	USERS_NUMBER=cat $EMAILS_LIST_PATH | wc -l
-
-	USERS_NUMBER=1
-	EMAIL_SENDER="no-reply"
-
+	#http://stackoverflow.com/questions/12022319/bash-echo-number-of-lines-of-file-given-in-a-bash-variable-without-the-file-name
 	#http://stackoverflow.com/questions/30988586/creating-an-array-from-a-text-file-in-bash
 	#Get email-list
 	mapfile -t MARKS_ARRAY < $MARKS_LIST_PATH
 	mapfile -t EMAILS_ARRAY < $EMAILS_LIST_PATH
 
-	echo $USERS_NUMBER
+	# get length of an array
+	USERS_NUMBER=${#EMAILS_ARRAY[@]}
 
 	#https://www.cyberciti.biz/faq/unix-linux-iterate-over-a-variable-range-of-numbers-in-bash/
 	for (( i=1; i<=$((USERS_NUMBER)); i++ ))
@@ -68,7 +59,7 @@ ${MARKS_ARRAY[i]}
 
 Salutacions
 EOF
-	sleep 5
+	sleep 1
 	done
 
 else
